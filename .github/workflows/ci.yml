@@ -1,0 +1,29 @@
+name: React CI
+
+on:
+ push:
+   branches: [ "main" ]
+ pull_request:
+   branches: [ "main" ]
+
+jobs:
+ test-and-build:
+   runs-on: ubuntu-latest
+
+   steps:
+     - name: Скачать код из GitHub
+       uses: actions/checkout@v4
+
+     - name: Установить Node.js
+       uses: actions/setup-node@v4
+       with:
+         node-version: 20
+
+     - name: Установить зависимости
+       run: npm install
+
+     - name: Запустить тесты
+       run: npm test
+
+     - name: Собрать React-проект
+       run: npm run build
